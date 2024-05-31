@@ -5,7 +5,7 @@
     <h2>Formularios</h2>
     <hr>
 
-      <form novalidate @submit.prevent="enviar">
+      <form @submit.prevent="enviar">
 
         <div class="form-group">
           <label for="nombre" class="nombre">nombre</label>
@@ -29,10 +29,11 @@
 
         <div class="form-group">
           <label for="email" class="email">email</label>
-          <input id="email" type="email" class="form-control" v-model.trim="formData.email" @input="formDirty.email=true && emailOk" >
-          <div v-if="(!formData.email || !emailOk) && formDirty.email" class="alert alert-danger mt-1">
+          <input id="email" type="email" class="form-control" v-model.trim="formData.email" @input="formDirty.email=true">
+          <div v-if="(!formData.email || !this.emailOk())  &&  formDirty.email" class="alert alert-danger mt-1">
             <span v-if="!formData.email">Campo Requerido</span>
-            <span v-else-if="!emailOk">Formato de email ingresado es incorrecto</span>
+            <span v-else-if="!this.emailOk()">Formato de email ingresado es incorrecto</span> 
+         
             
           </div>
         </div>
@@ -98,7 +99,11 @@
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(this.formData.email)
                 
-      } 
+      },
+    /*    tieneArroba(){
+        let asd = this.formData.email.s
+
+       } */
     },
     computed: {
       edadMin: 18,
@@ -111,7 +116,7 @@
 
 <style scoped lang="css">
 .jumbotron {
-    background: pink;
+    background: grey;
     color: brown;
   }
   
