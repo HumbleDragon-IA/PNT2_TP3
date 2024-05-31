@@ -37,22 +37,24 @@
             
           </div>
         </div>
+  </form>
 
-      
-
-      </form>
-      <p>mail</p>
-      <pre> {{this.emailOk()}} </pre>
-    <hr>
-    <p><u>formData</u></p>
-    <pre>{{formData}}</pre>
-
-    <hr>
-    <p><u>formDirty</u></p>
-    <pre>{{formDirty}}</pre>
-
+  <div class="table-responsive">
+   <table class="table table-dark">
+     <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Email</th>
+     </tr>
     
+     <tr v-if="this.datosOk()">
+      <td>{{ formData.nombre }}</td>
+      <td>{{ formData.edad }}</td>
+      <td>{{ formData.email }}</td>
+     </tr>
+   </table>
   </div>
+</div>
   </section>
 
 </template>
@@ -74,11 +76,22 @@
     },
     methods: {
 
+      edadOk(){
+        return  this.formData.edad >=18 && this.formData.edad <=120
+      },
+
+      nombreOk(){
+        return this.caracterMax() && this.caracterMin()
+      },
+      datosOk(){
+        return this.emailOk() && this.edadOk() && this.nombreOk()
+      },
+
       caracterMin(){
-        return this.formData.nombre.length<5;
+        return this.formData.nombre!=null && this.formData.nombre.length>=5;
       },
       caracterMax(){
-        return this.formData.nombre.length>15;
+        return this.formData.nombre!=null && this.formData.nombre.length<=15;
       },
 
       enviar(){
