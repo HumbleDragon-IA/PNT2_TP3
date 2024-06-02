@@ -1,11 +1,14 @@
 <template>
   <div class="container mt-3">
     <div class="jumbotron">
-      <h1>Bienvenidos a VUE CLI</h1>
-      <h2>Componente Principal (App)</h2>
+      <h1>Trabajo Practico N°3 de PNT</h1>
+      
       <br>
 
-      <Formulario/>
+      <Navbar/>
+
+      <RouterView />
+    
 
       
        
@@ -17,12 +20,12 @@
 </template>
 
 <script>
-import Formulario from './components/Formulario.vue'
+import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'App',
   components: {
-    Formulario,
+  Navbar
   }
 }
 </script>

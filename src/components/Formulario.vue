@@ -3,9 +3,9 @@
   <section class="src-components-formulario">
     <div class="jumbotron">
     <h2>Formularios</h2>
-    <hr>
-
-      <form @submit.prevent="enviar">
+    <hr >
+      
+      <form  @submit.prevent="enviar" >
 
         <div class="form-group">
           <label for="nombre" class="nombre">nombre</label>
@@ -37,10 +37,10 @@
             
           </div>
         </div>
-  </form>
 
-  <div class="table-responsive">
-   <table class="table table-dark">
+        <div class="table-responsive">
+   <table v-if="this.datosOk()" class="table table-dark">
+    <h4 >Si está seguro haga click en "Enviar"</h4>
      <tr>
       <th>Nombre</th>
       <th>Edad</th>
@@ -54,23 +54,38 @@
      </tr>
    </table>
   </div>
+        <button class="btn btn-success my-3" v-if="this.datosOk()" type="submit" @click="this.enviar" >Enviar</button>
+  </form>
+
+  
 </div>
   </section>
 
 </template>
 
-<script lang="js">
+<script >
+import * as serviciosUsuarios from '../servicios/usuarios'
+
 
   export default  {
     name: 'src-components-formulario',
     props: [],
+    
+    beforeCreate(){
+      console.log("acaca")
+
+    },
+
     mounted () {
 
     },
+
+   
     data () {
       return {
         formData: this.inicializarData(),
         formDirty: this.inicializarData(),
+        modoEditor: false,
 
       }
     },
@@ -94,10 +109,13 @@
         return this.formData.nombre!=null && this.formData.nombre.length<=15;
       },
 
-      enviar(){
+       enviar(){
         console.log({...this.formData})
+        serviciosUsuarios.post(this.formData)
+        
         this.formData = this.inicializarData();
         this.formDirty=this.inicializarData();
+
       },
       inicializarData() {
        return { 
@@ -148,4 +166,5 @@
   label {
     text-transform: capitalize;
   }
+ 
 </style>
