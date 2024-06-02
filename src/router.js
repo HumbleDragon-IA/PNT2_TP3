@@ -3,9 +3,8 @@ import Formulario from './components/Formulario.vue';
 import Api from './components/Api.vue';
 
 const routes = [
-  { path: '/', component: Api },
+  { path: '/', component: Formulario },
   { path: '/formulario', component: Formulario },
-  { path: '/formulario/:id', component: Formulario, props: true },
   { path: '/api', component: Api },
   { path: '/:pathMatch(.*)*', component: Api }
 ];

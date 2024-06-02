@@ -39,15 +39,15 @@
         </div>
 
         <div class="table-responsive">
-   <table v-if="this.datosOk()" class="table table-dark">
-    <h4 >Si está seguro haga click en "Enviar"</h4>
+   <table  class="table table-dark">
+    
      <tr>
       <th>Nombre</th>
       <th>Edad</th>
       <th>Email</th>
      </tr>
     
-     <tr v-if="this.datosOk()">
+     <tr >
       <td>{{ formData.nombre }}</td>
       <td>{{ formData.edad }}</td>
       <td>{{ formData.email }}</td>
@@ -64,29 +64,22 @@
 </template>
 
 <script >
-import * as serviciosUsuarios from '../servicios/usuarios'
+
 
 
   export default  {
     name: 'src-components-formulario',
     props: [],
     
-    beforeCreate(){
-      console.log("acaca")
-
-    },
-
     mounted () {
 
     },
 
-   
     data () {
       return {
         formData: this.inicializarData(),
         formDirty: this.inicializarData(),
-        modoEditor: false,
-
+      
       }
     },
     methods: {
@@ -111,7 +104,7 @@ import * as serviciosUsuarios from '../servicios/usuarios'
 
        enviar(){
         console.log({...this.formData})
-        serviciosUsuarios.post(this.formData)
+        
         
         this.formData = this.inicializarData();
         this.formDirty=this.inicializarData();
@@ -131,10 +124,7 @@ import * as serviciosUsuarios from '../servicios/usuarios'
         return emailRegex.test(this.formData.email)
                 
       },
-    /*    tieneArroba(){
-        let asd = this.formData.email.s
-
-       } */
+   
     },
     computed: {
       edadMin: 18,
